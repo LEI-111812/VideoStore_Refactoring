@@ -1,5 +1,7 @@
 package v4;
 
+import java.security.PrivilegedAction;
+
 public class Rental
 {
 	private Movie	_movie;
@@ -45,8 +47,7 @@ public class Rental
 		return result;
 	}
 
-	public int getFrequentRentalPoints()
-	{
-		return (getMovie().getPriceCode() == Movie.Code.NEW_RELEASE) && getDaysRented() > 1 ? 2 : 1;
-	}
+	public int getFrequentRentalPoints(PrivilegedAction<Integer> privilegedAction) {
+        return privilegedAction.run();
+    }
 }

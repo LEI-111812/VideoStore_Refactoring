@@ -6,8 +6,10 @@ public class Customer
 {
 	private String			_name;
 	private Vector<Rental>	_rentals	= new Vector<Rental>();
+    private double totalAmount;
+    private int frequentRenterPoints;
 
-	public Customer(String _name)
+    public Customer(String _name)
 	{
 		this._name = _name;
 	}
@@ -24,15 +26,15 @@ public class Customer
 
 	public String statement()
 	{
-		double totalAmount = 0;
-		int frequentRenterPoints = 0;
+        totalAmount = 0;
+        frequentRenterPoints = 0;
 
 		// header
 		String result = "Rental Record for " + getName() + "\n";
 		
 		for (Rental each: _rentals)
 		{
-			frequentRenterPoints += each.getFrequentRentalPoints();
+			frequentRenterPoints += each.getFrequentRentalPoints(() -> (each.getMovie().getPriceCode() == Movie.Code.NEW_RELEASE) && each.getDaysRented() > 1 ? 2 : 1);
 
 			// show figures for this rental
 			result += "\t" + each.getMovie().getTitle() + "\t" + each.getAmount() + "\n";
