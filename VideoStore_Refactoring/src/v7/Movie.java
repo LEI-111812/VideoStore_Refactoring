@@ -1,15 +1,25 @@
 package v7;
 
 public class Movie {
-
 	public enum Code {REGULAR, CHILDRENS, NEW_RELEASE};
 	
 	private String _title;
 	private Code _priceCode;
+	private Price _price;
 	
 	public Movie(String title, Code priceCode) {
 		_title = title;
 		_priceCode = priceCode;
+
+		if(_priceCode == Code.REGULAR){
+			_price= new RegPrice();
+		}
+		else if(_priceCode == Code.NEW_RELEASE){
+			_price= new NewPrice();
+		}
+		else{ //se for Code.CHILDREN
+			_price= new KidPrice();
+		}
 	}
 
 	public String getTitle() {
@@ -20,31 +30,33 @@ public class Movie {
 		return _priceCode;
 	}
 
-	public double getRentalAmount(int duration)
-	{
-		double result = 0;
-	
-		switch (_priceCode)
-		{
-			case REGULAR:
-				result += 2;
-				if (duration > 2)
-					result += (duration - 2) * 1.5;
-				break;
-			case NEW_RELEASE:
-				result += duration * 3;
-				break;
-			case CHILDRENS:
-				result += 1.5;
-				if (duration > 3)
-					result += (duration - 3) * 1.5;
-				break;
-		}
-		return result;
+	public double getRentalAmount(int duration){
+		return _price.getRentalAmount(duration);
 	}
 
-	public int getFrequentRentalPoints(int duration)
-	{
+	//problema de um switch case grande
+//	public double getRentalAmount(int duration) {
+//		double result = 0;
+//
+//		switch (_priceCode) {
+//			case REGULAR:
+//				result += 2;
+//				if (duration > 2)
+//					result += (duration - 2) * 1.5;
+//				break;
+//			case NEW_RELEASE:
+//				result += duration * 3;
+//				break;
+//			case CHILDRENS:
+//				result += 1.5;
+//				if (duration > 3)
+//					result += (duration - 3) * 1.5;
+//				break;
+//		}
+//		return result;
+//	}
+
+	public int getFrequentRentalPoints(int duration) {
 		return (_priceCode == Code.NEW_RELEASE) && duration > 1 ? 2 : 1;
 	}		
 }
