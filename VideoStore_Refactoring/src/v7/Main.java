@@ -27,7 +27,7 @@ public abstract class Main
 		who.addRental(new Rental(m3, 3));
 		System.out.println( who.statement());
 		
-		PrintWriter html = new PrintWriter(new FileWriter("webPages/statement.html")); 
+		PrintWriter html = new PrintWriter(new FileWriter("VideoStore_Refactoring/webPages/statement.html"));
 		html.println(who.htmlStatement()); 
 		html.close();
 	}

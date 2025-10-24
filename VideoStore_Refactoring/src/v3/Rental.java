@@ -1,28 +1,23 @@
 package v3;
 
-public class Rental
-{
+public class Rental {
 	private Movie	_movie;
 	private int		_daysRented;
 
-	public Rental(Movie movie, int daysRented)
-	{
+	public Rental(Movie movie, int daysRented) {
 		_movie = movie;
 		_daysRented = daysRented;
 	}
 
-	public int getDaysRented()
-	{
+	public int getDaysRented() {
 		return _daysRented;
 	}
 
-	public Movie getMovie()
-	{
+	public Movie getMovie() {
 		return _movie;
 	}
 
-	public double getAmount()
-	{
+	public double getAmount() {
 		double result = 0;
 	
 		// determine amounts for each line
@@ -43,5 +38,10 @@ public class Rental
 				break;
 		}
 		return result;
+	}
+
+	//devolve 2 se for novo e for rented por mais q 1 dia, devolve 1 cc
+	public int getFrequentRentalPoints() {
+		return ((getMovie().getPriceCode() == Movie.Code.NEW_RELEASE) && getDaysRented() > 1) ? 2 : 1;
 	}
 }
