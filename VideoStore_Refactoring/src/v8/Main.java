@@ -1,5 +1,6 @@
 package v8;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,9 +30,9 @@ public abstract class Main
 		who.addRental(new Rental(m2, 2));
 		who.addRental(new Rental(m3, 3));
 		System.out.println( who.statement());
-		
-		PrintWriter html = new PrintWriter(new FileWriter("webPages/statement.html")); 
-		html.println(who.htmlStatement()); 
+
+        PrintWriter html = new PrintWriter(new FileWriter("VideoStore_Refactoring/webPages/statement.html"));
+		html.println(who.htmlStatement());
 		html.close();
 	}
 
