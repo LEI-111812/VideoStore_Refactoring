@@ -28,7 +28,7 @@ public class Customer
 		String result = "Rental Record for " + getName() + "\n";
 
 		for (Rental each : _rentals)
-			result += "\t" + each.getMovie().getTitle() + "\t" + each.getAmount() + "\n";
+			result += "\t" + each.getMovie().getTitle() + "\t" + getAmount(each) + "\n";
 
 		// add footer lines
 		result += "Amount owed is " + getTotalAmount() + "\n";
@@ -44,7 +44,7 @@ public class Customer
 
 		result += "<ul>\n";
 		for (Rental each : _rentals)
-			result += "\t<li>" + each.getMovie().getTitle() + "\t" + each.getAmount()+"\n";
+			result += "\t<li>" + each.getMovie().getTitle() + "\t" + getAmount(each) +"\n";
 		result += "</ul>\n";
 
 		// add footer lines
@@ -59,15 +59,23 @@ public class Customer
 	{
 		int frequentRenterPoints = 0;
 		for (Rental each : _rentals)
-			frequentRenterPoints += each.getFrequentRentalPoints();
+			frequentRenterPoints += getFrequentRentalPoints(each);
 		return frequentRenterPoints;
+	}
+
+	private int getFrequentRentalPoints(Rental each) {
+		return each.getFrequentRentalPoints();
 	}
 
 	public double getTotalAmount()
 	{
 		double totalAmount = 0;
 		for (Rental each : _rentals)
-			totalAmount += each.getAmount();
+			totalAmount += getAmount(each);
 		return totalAmount;
+	}
+
+	private double getAmount(Rental each) {
+		return each.getAmount();
 	}
 }
